@@ -51,7 +51,6 @@ class PSO:
 
     def compute_particle_pbest(self, p):
         if (self.func(p.get_x()) < self.func(p.get_pbest()) ):
-            #print("yes pbest")
             p.set_pbest(p.get_x())
 
     def update_position(self, p):

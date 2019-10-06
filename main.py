@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 
 def init(edge, step):
      x0 = []
-     for i in range(-(edge-2), edge-2, step):
-          for j in range(-(edge-2), edge-2, step):
+     for i in range(-(edge-2-int(step/2)), edge-2, step):
+          for j in range(-(edge-2-int(step/2)), edge-2, step):
                x0.append(np.array([i,j]))
      parts = len(x0)
 
@@ -28,19 +28,18 @@ def error_plot(error):
 
 dim = 2
 edge = 20
-f = functions.noise
-parts = 7
-#parts, x0 = init(edge=edge, step=5)
+f = functions.rastrigin#gaus_bi
+parts = 10
+#parts, x0 = init(edge=edge, step=int(edge/2))
 
 np.random.seed(123)
 pso = GBEST.GBEST(n_particles = parts, dim = dim, edges = (np.array([-edge, -edge]), np.array([edge, edge])),\
-     v_max = 4, v_min = -4, omega = 0.5, c1 = 2.05, c2 = 2.05, kappa = 0.7, func = f)#, x0=x0)
+     v_max = 4, v_min = -4, omega = 0.5, c1 = 2.05, c2 = 2.05, kappa = 0.7, func = f, x0=None)
 
-
-pso.loop(100)
+pso.loop(60)
 pos = pso.two_dim_positions()
 error = pso.get_error()
-print(error[-1])
+#print(error[-1])
 #error_plot(error)
 
 

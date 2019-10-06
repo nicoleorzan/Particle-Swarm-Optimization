@@ -11,8 +11,8 @@ class Particle:
         self.dim = dim
         self.x = x0 if x0 is not None else np.array([ np.random.rand()*(self.x_max[d] - self.x_min[d]) + self.x_min[d] for d in range(self.dim)] ) 
         #print("X0= ", self.x)
-        self.v = np.array([ 0 for d in range(self.dim)] )
-        #self.v = np.array([ (np.random.rand()*((self.v_max - self.v_min)) + self.v_min) for d in range(self.dim)] )
+        #self.v = np.array([ 0 for d in range(self.dim)] )
+        self.v = np.array([ (np.random.rand()*((self.v_max - self.v_min)) + self.v_min) for d in range(self.dim)] )
         self.pbest = self.x
         self.gbest = self.x
         self.check_dimensions()

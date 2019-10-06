@@ -3,16 +3,29 @@ import Anim2 as Anim
 import numpy as np
 import functions
 
-dim = 2
-parts = 7
-edge = 100
-f = functions.f
+def init(edge, step):
+     x0 = []
+     for i in range(-(edge-2-int(step/2)), edge-2, step):
+          for j in range(-(edge-2-int(step/2)), edge-2, step):
+               x0.append(np.array([i,j]))
+     parts = len(x0)
 
-np.random.seed(123)
+     return parts, x0
+
+dim = 2
+parts = 10
+edge = 20
+f = functions.rastrigin#gaus_bi
+parts, x0 = init(edge=edge, step=int(edge/2))
+
+c = 2.05
+#omega = 0.5*(2*c)-1
+np.random.seed(223)
 pso = LBEST.LBEST(neighbors = 1, n_particles = parts, dim = dim, edges = (np.array([-edge, -edge]), np.array([edge, edge])),\
-     v_max = 4, v_min = -4, omega = 0.5, c1 = 2.05, c2 = 2.05, kappa = 0.7, func = f)
+     v_max = 4, v_min = -4, omega = 0.5, c1 = c, c2 = c, kappa = 1, func = f, x0=x0)
 swarm = pso.get_swarm()
-pso.loop(50)
+pso.loop(100)
+
 
 pos = pso.two_dim_positions()
 ani = Anim.Anim(pos, func = f, edge = edge)

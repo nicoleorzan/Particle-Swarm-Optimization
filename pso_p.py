@@ -5,7 +5,7 @@ np.random.seed(123)
 
 
 
-n_particles = 80
+n_particles = 100
 a_min = -1
 a_max = 1
 x_max = a_max
@@ -16,11 +16,23 @@ dim = 100
 T = dim
 
 
-itera = 150
+itera = 700
 w = 0.7298
 c1 = 1.49618
 c2 = 1.49618
 s0 = (-np.pi/6, 0.0)
+mc = 1.0
+mp = 0.1
+g = -9.81
+Ft = 10
+
+#def theta_sec():
+#    return g*np.sin(theta) + np.cos(theta)*((-Ft-mp*l*theta_dot*np.sin(theta))/(l*(4/3 - (mp*np.cos(theta)*np.cos(theta))/(mc+mp))))
+#def rho_sec():
+#    (Ft + mp*l*(theta_dot*theta_dot)*np.sin(theta)-theta_sec*np.cos(theta))/(mc+mp)
+#s0_cart = (np.pi, 0., 0., 0.)
+#theta, thea_dot, rho, rho_dot = s0_cart
+#R_cart = -np.sqrt((rho/1.4)*(rho/1.4) + (theta/0.3)*(theta/0.3))
 q = 0.05
 gamma = q**(1/(dim-1))
 
@@ -43,20 +55,12 @@ def real_system(S, a):
 
 def update_particle_velocity(v, x, y_pbest, y_gbest):
     v = w*v + c1*np.random.uniform()*(y_pbest - x) + c2*np.random.uniform()*(y_gbest - x)
-    #print("v update,  ", v)
     if v.all() > v_max: v = v_max
     elif v.all() < v_min: v = v_min
     return v
 
 def update_particle_position(x, v):
     x = x + v
-    #print("x update,  ", x)
-    """if (x.all() < 0.3 and x.all() > -0.3):
-        x = 0
-    elif (x.all() > 0.3):
-        x = 1
-    elif (x.all() < -0.3):
-        x = -1"""
     if x.all() > x_max: x = x_max
     elif x.all() < x_min: x = x_min
     return x
@@ -84,23 +88,16 @@ def PSO_P(S, P):
     #print("X[0]=",X[0])
     #print("V[0]=",V[0])
     Pbest = X
-    #Gbest = X
     Gbest = X[0]
-    #print("Gbest= ",Gbest)
 
     for i in range(0, n_particles):
         p = 0
-        #print("particle ", i)
         while p < P:
-            #print("X[i]", X[i])
             if model_based_computation(S, X[i]) > model_based_computation(S, Pbest[i]):
                 Pbest[i] = X[i]
-            #print("Pbest[", i, "]=", Pbest[i])
 
-            #compute_particle_Gbest(S, i, Pbest, Gbest)
             if model_based_computation(S, Pbest[i]) > model_based_computation(S, Gbest):
                 Gbest = Pbest[i]
-            #print("Gbest", Gbest)
 
             V[i] = update_particle_velocity(V[i], X[i], Pbest[i], Gbest)
             X[i] = update_particle_position(X[i], V[i])
@@ -118,23 +115,21 @@ def policy(s0, iterations):
     reached = 0
     states = []
     s = s0
-    f = open("file3.txt", "w") 
+    f = open("file_test.txt", "w") 
     f.write("t        x       y \n")
     print(s0, "\n starting iterations:")
     for i in range(1, iterations):
         print("it = ", i)
-        best_sequence = PSO_P(s, i)
-        #print("selecting a= ")
+        best_sequence = PSO_P(s, 1) #i)
         a = best_sequence[0]
-        #print(a)
-        s, r = real_system(s, a)
-        pos, _ =s
+        if (reached != 1):
+            s, r = real_system(s, a)
+            pos, _ =s
         f.write(str(i) + "   " + str(pos) + "   " + str(landscape(pos)) + "\n")
         if (pos >= np.pi/6):
             reached = 1
-            print("reached", reached)
-            break
-        #print(pos)
+            #print("reached", reached)
+            #break
         states.append(pos)
     
     f.close()
@@ -143,8 +138,8 @@ def policy(s0, iterations):
 
 states, s, r = policy(s0, itera)
 #print("states", states)
-landscape_v = np.vectorize(landscape)
+#landscape_v = np.vectorize(landscape)
 #print("landscape",landscape_v(states))
-plt.plot(states, landscape_v(states))
-plt.savefig('foo.png')
-plt.show()
+#plt.plot(states, landscape_v(states))
+#plt.savefig('foo.png')
+#plt.show()

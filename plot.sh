@@ -1,14 +1,18 @@
 #!/bin/bash      
 
 gnuplot -e "
-set xrange [-1:1];
+set terminal gif animate delay 0.5;
+set output 'file_test.gif';
+
+set xrange [-1.2:0.6];
 set yrange [-1:1];
 set ticslevel 0;
 
-set xlabel 'x';
-set ylabel 'y';
+set xlabel '{/Symbol r}';
+set ylabel 'sin(3{/Symbol r})';
+set nokey;
 
-filedata = 'file2.txt';
+filedata = 'file_test.txt';
 n = system(sprintf('cat %s | wc -l', filedata));
 
 do for [j=1:n-1] {

@@ -9,33 +9,34 @@ class LBEST(PSO.PSO):
         super().__init__(n_particles, dim, edges, v_max, v_min, omega, c1, c2, kappa, func, c_max, c_min, x0)
         self.neighbors = neighbors
         self.neighbors_indices = {}
+        self.compute_nearest_neighbors()
 
     def compute_particle_gbest(self, p):
-        for i, l in enumerate(self.swarm):
-            if i in self.neighbors_indices[p]:
+        for idx, l in enumerate(self.swarm):
+            if idx in self.neighbors_indices[p]:
                 if (self.func(l.get_pbest()) < self.func(p.get_gbest())):
                     p.set_gbest(l.get_pbest())
     
-    def compute_nearest_neighbors(self, p):
-        d = []
-        for _, l in enumerate(self.swarm):
-            d.append(np.sqrt(np.sum(np.square( p.get_x() - l.get_x() ))))
-        idx = np.argpartition(np.array(d), self.neighbors*2)
-        min_values = np.array(d)[idx[:self.neighbors*2+1]]
-        indices = np.where(np.in1d(d, min_values))[0]
-        self.neighbors_indices[p] = indices
+    def compute_nearest_neighbors(self):
+        self.neighbors_indices = {}
+        for i, l in enumerate(self.swarm):
+            self.neighbors_indices[l] = [i-1, i, i+1]
 
     def loop(self, iterations):
 
         it = 0
         while it < iterations:
             for _, p in enumerate(self.swarm):
-
-                self.compute_nearest_neighbors(p)
+                
+                #tmp = int(it/iterations*100)
+                #self.neighbors = tmp if (tmp > 0 and tmp < len(self.swarm)/2) else self.neighbors
+                #print(self.neighbors)
+                #self.compute_nearest_neighbors()
+                self.update_c1_c2(it, iterations)
                 self.compute_particle_pbest(p)
                 self.compute_particle_gbest(p)
 
-                self.update_velocity_lbest(p)
+                self.update_velocity_lbest_evolved(p)
                 self.update_position(p)
 
             self.X.append([p.get_x() for p in self.swarm])

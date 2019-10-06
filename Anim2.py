@@ -25,12 +25,12 @@ class Anim:
 
     def show_plot(self):
 
-        x = np.linspace(-self.edge, self.edge, 2*self.edge*5)
-        y = np.linspace(-self.edge, self.edge, 2*self.edge*5)
+        x = np.linspace(-self.edge, self.edge, 20*self.edge)
+        y = np.linspace(-self.edge, self.edge, 20*self.edge)
         fun_map = np.empty((x.size, y.size))
         for i in range(x.size):
             for j in range(y.size):
-                fun_map[i,j] = self.func([x[i], y[j]])
+                fun_map[i,j] = self.func([y[j], x[i]]) #([x[i], y[j]])
 
         s = self.fig.add_subplot(1, 1, 1, xlabel='$x$', ylabel='$y$')
         im = s.imshow(
@@ -47,5 +47,5 @@ class Anim:
         self.anim = animation.FuncAnimation(self.fig, self.update_plot, fargs = (self.fig, scat),
                                        frames = len(self.positions), interval = 700, repeat=False) 
 
-        plt.show(self.anim)
-        #self.anim.save(str(time.time())+'.gif', writer='imagemagick', fps=5)
+        #plt.show(self.anim)
+        self.anim.save(str(time.time())+'rastrigin.gif', writer='imagemagick', fps=5)
