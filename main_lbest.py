@@ -1,5 +1,5 @@
 import LBEST
-import Anim2 as Anim
+import Anim as Anim
 import numpy as np
 import functions
 

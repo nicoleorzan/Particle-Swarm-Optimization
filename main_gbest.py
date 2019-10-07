@@ -1,5 +1,5 @@
 import GBEST
-import Anim2 as Anim
+import Anim as Anim
 import functions
 import numpy as np
 import matplotlib.pyplot as plt
