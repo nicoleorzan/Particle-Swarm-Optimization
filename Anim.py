@@ -47,5 +47,6 @@ class Anim:
         self.anim = animation.FuncAnimation(self.fig, self.update_plot, fargs = (self.fig, scat),
                                        frames = len(self.positions), interval = 700, repeat=False) 
 
-        plt.show(self.anim)
+        #plt.show(self.anim)
         #self.anim.save(str(time.time())+'gaus.gif', writer='imagemagick', fps=5)
+        self.anim.save('SAPSO_omega_changing_ordered_gaus.gif', writer='imagemagick', fps=5)

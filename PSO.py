@@ -19,6 +19,8 @@ class PSO:
         self.c_min = c_min
         self.x0 = x0
         self.error = []
+        self.omega_max = 20
+        self.omega_min = 0.5
 
         if self.x0 != None:
             self.swarm = [Particle.Particle(self.dim, v_max = self.v_max, v_min = self.v_min, \
@@ -45,6 +47,9 @@ class PSO:
     def get_error(self):
         return self.error
 
+    def update_omega(self, iterations, it):
+        self.omega = self.omega_max - it*(self.omega_max - self.omega_min)/iterations
+
     def update_c1_c2(self, t, iter_tot):
         self.c1 = (self.c_min - self.c_max) *t/iter_tot + self.c_max
         self.c2 = (self.c_max - self.c_min) *t/iter_tot + self.c_min
@@ -67,8 +72,9 @@ class PSO:
         self.c2 * np.random.uniform() * (self.GBEST - p.get_x()) ) )
 
     def update_velocity_lbest(self, p):
-        tmp = self.omega * p.get_v() + self.c1 * np.random.uniform() * (p.get_pbest() - p.get_x()) + \
-        self.c2 * np.random.uniform() * (p.get_gbest() - p.get_x())
+        tmp = self.omega * p.get_v() + \
+            self.c1 * np.random.uniform() * (p.get_pbest() - p.get_x()) + \
+            self.c2 * np.random.uniform() * (p.get_gbest() - p.get_x())
         p.set_v(tmp) if tmp.all() < self.v_max else p.set_v(self.v_max)
 
     def update_velocity_lbest_evolved(self, p):

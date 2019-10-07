@@ -30,7 +30,7 @@ def gaussian_bimodal(x, x0 = -40, y0 = -40, x1 = 50, y1 = 50, sx = 4, sy = 5, rh
     #return 1/(2*np.pi*sx*sy*np.sqrt(1-rho**2)) * np.exp(-Qsquared/2)
 
 def gaus_bi(x):
-    x0 = 50
+    x0 = 90
     x1 = -40
     y0 = 40
     y1 = -60

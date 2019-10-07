@@ -30,9 +30,7 @@ class SAPSO(PSO.PSO):
         while it < iterations:
 
             T = self.T0 - self.T0*it/iterations  #iterations/(it+1)
-            #print("T",T)
-            #T = iterations/(it+1)
-            #print(iterations/(it+1))
+
             for _, p in enumerate(self.swarm):
 
                 self.compute_particle_pbest(p)

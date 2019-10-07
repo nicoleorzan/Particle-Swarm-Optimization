@@ -21,6 +21,7 @@ class GBEST(PSO.PSO):
                 self.compute_gbest(p)
 
                 #self.update_c1_c2(it, iterations)
+                self.update_omega(iterations, it)
                 self.update_velocity_gbest(p)
                 self.update_position(p)
 
