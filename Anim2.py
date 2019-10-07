@@ -25,8 +25,8 @@ class Anim:
 
     def show_plot(self):
 
-        x = np.linspace(-self.edge, self.edge, 20*self.edge)
-        y = np.linspace(-self.edge, self.edge, 20*self.edge)
+        x = np.linspace(-self.edge, self.edge, self.edge)
+        y = np.linspace(-self.edge, self.edge, self.edge)
         fun_map = np.empty((x.size, y.size))
         for i in range(x.size):
             for j in range(y.size):
@@ -47,5 +47,5 @@ class Anim:
         self.anim = animation.FuncAnimation(self.fig, self.update_plot, fargs = (self.fig, scat),
                                        frames = len(self.positions), interval = 700, repeat=False) 
 
-        #plt.show(self.anim)
-        self.anim.save(str(time.time())+'rastrigin.gif', writer='imagemagick', fps=5)
+        plt.show(self.anim)
+        #self.anim.save(str(time.time())+'gaus.gif', writer='imagemagick', fps=5)

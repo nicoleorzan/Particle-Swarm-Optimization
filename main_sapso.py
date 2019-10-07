@@ -1,4 +1,4 @@
-import GBEST
+import SAPSO
 import Anim2 as Anim
 import functions
 import numpy as np
@@ -27,13 +27,12 @@ def error_plot(error):
 
 
 dim = 2
+parts = 13
 edge = 200
 f = functions.gaus_bi
-parts = 13
-#parts, x0 = init(edge=edge, step=int(edge/2))
 
 np.random.seed(123)
-pso = GBEST.GBEST(n_particles = parts, dim = dim, edges = (np.array([-edge, -edge]), np.array([edge, edge])),\
+pso = SAPSO.SAPSO(n_particles = parts, dim = dim, edges = (np.array([-edge, -edge]), np.array([edge, edge])),\
      v_max = 4, v_min = -4, omega = 0.5, c1 = 2.05, c2 = 2.05, kappa = 0.7, func = f, x0=None)
 
 pso.loop(100)
@@ -45,4 +44,3 @@ error = pso.get_error()
 
 ani = Anim.Anim(pos, func = f, edge = edge)
 ani.show_plot()
-

@@ -32,11 +32,12 @@ class LBEST(PSO.PSO):
                 #self.neighbors = tmp if (tmp > 0 and tmp < len(self.swarm)/2) else self.neighbors
                 #print(self.neighbors)
                 #self.compute_nearest_neighbors()
+
                 self.update_c1_c2(it, iterations)
                 self.compute_particle_pbest(p)
                 self.compute_particle_gbest(p)
 
-                self.update_velocity_lbest_evolved(p)
+                self.update_velocity_lbest(p)
                 self.update_position(p)
 
             self.X.append([p.get_x() for p in self.swarm])

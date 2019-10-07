@@ -13,16 +13,16 @@ def init(edge, step):
      return parts, x0
 
 dim = 2
-parts = 10
-edge = 20
-f = functions.rastrigin#gaus_bi
-parts, x0 = init(edge=edge, step=int(edge/2))
+parts = 26
+edge = 200
+f = functions.gaus_bi
+#parts, x0 = init(edge=edge, step=int(edge/2))
 
 c = 2.05
 #omega = 0.5*(2*c)-1
-np.random.seed(223)
+np.random.seed(123)
 pso = LBEST.LBEST(neighbors = 1, n_particles = parts, dim = dim, edges = (np.array([-edge, -edge]), np.array([edge, edge])),\
-     v_max = 4, v_min = -4, omega = 0.5, c1 = c, c2 = c, kappa = 1, func = f, x0=x0)
+     v_max = 16, v_min = -16, omega = 0.5, c1 = c, c2 = c, kappa = 1, func = f, x0=None)
 swarm = pso.get_swarm()
 pso.loop(100)
 
