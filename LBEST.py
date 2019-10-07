@@ -2,7 +2,6 @@ import Particle
 import PSO as PSO
 import numpy as np
 
-
 class LBEST(PSO.PSO):
 
     def __init__(self, neighbors, n_particles, dim, edges, v_max, v_min, omega, c1, c2, kappa, func, c_max = 2.5, c_min = 0.5, x0=None):

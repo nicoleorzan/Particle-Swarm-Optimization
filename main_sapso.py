@@ -4,7 +4,6 @@ import functions
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def init(edge, step):
      x0 = []
      for i in range(-(edge-2-int(step/2)), edge-2, step):
@@ -25,7 +24,6 @@ def error_plot(error):
      plt.ylim([10**(-15),y_err[0]])
      plt.show()
 
-
 dim = 2
 parts = 13
 edge = 200
@@ -40,7 +38,6 @@ pos = pso.two_dim_positions()
 error = pso.get_error()
 #print(error[-1])
 #error_plot(error)
-
 
 ani = Anim.Anim(pos, func = f, edge = edge)
 ani.show_plot()

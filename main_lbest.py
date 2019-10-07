@@ -26,7 +26,6 @@ pso = LBEST.LBEST(neighbors = 1, n_particles = parts, dim = dim, edges = (np.arr
 swarm = pso.get_swarm()
 pso.loop(100)
 
-
 pos = pso.two_dim_positions()
 ani = Anim.Anim(pos, func = f, edge = edge)
 ani.show_plot()

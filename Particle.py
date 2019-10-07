@@ -7,10 +7,8 @@ class Particle:
         self.v_min = v_min
         self.x_min, self.x_max = edges#
         assert(len(self.x_min) == dim)
-        #print("min xy (2d)", self.x_min, "max xy (2d)", self.x_max)
         self.dim = dim
         self.x = x0 if x0 is not None else np.array([ np.random.rand()*(self.x_max[d] - self.x_min[d]) + self.x_min[d] for d in range(self.dim)] ) 
-        #print("X0= ", self.x)
         #self.v = np.array([ 0 for d in range(self.dim)] )
         self.v = np.array([ (np.random.rand()*((self.v_max - self.v_min)) + self.v_min) for d in range(self.dim)] )
         self.pbest = self.x

@@ -9,7 +9,6 @@ class SAPSO(PSO.PSO):
         self.T0 = T0
         self.v_max = v_max
         self.func = func
-        
 
     def compute_gbest(self, p):
         if (self.func(p.get_pbest()) < self.func(self.GBEST)):
