@@ -49,4 +49,4 @@ class Anim:
 
         #plt.show(self.anim)
         #self.anim.save(str(time.time())+'gaus.gif', writer='imagemagick', fps=5)
-        self.anim.save('SAPSO_variables_changing_ordered_gaus.gif', writer='imagemagick', fps=5)
+        self.anim.save('LBEST_variables_changing_ordered_gaus.gif', writer='imagemagick', fps=5)

@@ -35,8 +35,8 @@ class LBEST(PSO.PSO):
                 self.compute_particle_pbest(p)
                 self.compute_particle_gbest(p)
 
-                #self.update_omega(iterations, it)
-                #self.update_c1_c2(it, iterations)
+                self.update_omega(iterations, it)
+                self.update_c1_c2(it, iterations)
                 
                 self.update_velocity_lbest(p)
                 self.update_position(p)

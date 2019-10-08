@@ -24,7 +24,7 @@ np.random.seed(123)
 pso = LBEST.LBEST(neighbors = 1, n_particles = parts, dim = dim, edges = (np.array([-edge, -edge]), np.array([edge, edge])),\
      v_max = 4, v_min = -4, omega = 0.5, c1 = c, c2 = c, kappa = 0.7, func = f, x0=x0)
 swarm = pso.get_swarm()
-pso.loop(200)
+pso.loop(100)
 
 pos = pso.two_dim_positions()
 ani = Anim.Anim(pos, func = f, edge = edge)
