@@ -15,12 +15,15 @@ class SAPSO(PSO.PSO):
             self.GBEST = p.get_pbest()
 
     def compute_update_position(self, p):
-        tmp = self.omega * p.get_v() + \
+        v_new = self.omega * p.get_v() + \
             self.c1 * np.random.uniform() * (p.get_pbest() - p.get_x()) + \
             self.c2 * np.random.uniform() * (self.GBEST - p.get_x())
-        v_new = tmp if tmp.all() < self.v_max else self.v_max
-
+        v_new[v_new > self.v_max] = self.v_max
+        v_new[v_new < self.v_min] = self.v_min
+        
         x_new = p.get_x() + v_new
+        x_new[x_new > self.edges[1][1]] = self.edges[1][1]
+        x_new[x_new < self.edges[0][0]] = self.edges[0][0]
 
         return x_new, v_new
 
@@ -36,16 +39,17 @@ class SAPSO(PSO.PSO):
                 self.compute_particle_pbest(p)
                 self.compute_gbest(p)
 
+                self.update_omega(iterations, it)
+                self.update_c1_c2(it, iterations)
+
                 x_new, v_new = self.compute_update_position(p)
                 if (self.func(x_new) < self.func(p.get_x())):
                     p.set_x(x_new)
                     p.set_v(v_new)
                 else:
-                    #print(x_new, np.exp(-(x_new - x)/T))
                     if (np.exp(-(x_new - p.get_x())/T).all() >= np.random.uniform()):
                         p.set_x(x_new)
                         p.set_v(v_new)
-                #self.update_position(p)
 
             self.X.append([p.get_x() for p in self.swarm])
             err = abs([0,0] - self.func(self.get_GBEST()))

@@ -65,7 +65,9 @@ class PSO:
         tmp = self.omega * p.get_v() + \
             self.c1 * np.random.uniform() * (p.get_pbest() - p.get_x()) + \
             self.c2 * np.random.uniform() * (self.GBEST - p.get_x()) # social component
-        p.set_v(tmp) if tmp.all() < self.v_max else p.set_v(self.v_max)
+        tmp[tmp > self.v_max] = self.v_max
+        tmp[tmp < self.v_min] = self.v_min
+        p.set_v(tmp)
 
     def update_velocity_gbest_evolved(self, p):
         p.set_v (self.chi * ( p.get_v() + self.c1 * np.random.uniform() * (p.get_pbest() - p.get_x()) + \
