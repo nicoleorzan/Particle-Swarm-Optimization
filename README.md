@@ -14,12 +14,21 @@ You can find:
 
 
 Some Results:
+* SA_PSO Particle Swarm Optimization algorithm
 
 <figure>
   <img src="Images/SAPSO_variables_changing_ordered_gaus.gif" width=500px>
-  <figcaption>
-      SA_PSO Particle Swarm Optimization
-  </figcaption>
 </figure>
+
+Reference: Horng-Lin Shieh, Cheng-Chien Kuo, Chin-Ming Chiang “Modified particle swarm optimization algorithm with simulated annealing behavior and its numerical verification”, Applied Mathematics and Computation 218 (2011) 4365–4383
+
+* PSO_P mountain car
+
+<figure>
+  <img src="Images/mountain_car.gif" width=500px>
+</figure>
+
+Reference: Hein at al, “Reinforcement Learning with Particle Swarm Optimization Policy (PSO-P) in Continuous State and Action Spaces” , International Journal of Swarm Intelligence Research, 2016.
+
 
 
