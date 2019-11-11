@@ -13,3 +13,12 @@ You can find:
 - the cass Anim used to create gifs
 
 
+Some Results:
+
+<figure>
+  <img src="Images/SAPSO_variables_changing_ordered_gaus.gir" width=500px>
+  <figcaption>
+      SA_PSO Particle Swarm Optimization
+  </figcaption>
+</figure>
+
