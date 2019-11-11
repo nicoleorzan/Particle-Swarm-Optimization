@@ -13,7 +13,8 @@ You can find:
 - the cass Anim used to create gifs
 
 
-Some Results:
+## Some Results:
+
 * SA_PSO Particle Swarm Optimization algorithm
 
 <figure>
