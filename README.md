@@ -16,9 +16,10 @@ You can find:
 Some Results:
 
 <figure>
-  <img src="Images/SAPSO_variables_changing_ordered_gaus.gir" width=500px>
+  <img src="Images/SAPSO_variables_changing_ordered_gaus.gif" width=500px>
   <figcaption>
       SA_PSO Particle Swarm Optimization
   </figcaption>
 </figure>
+
 
