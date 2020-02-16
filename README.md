@@ -1,5 +1,7 @@
 ## Stochastic modeling exam repository
 
+---
+
 Implementation of the **Particle Swarm Optimization algorithm**, with the original version and some of its applications.
 
 You can find:
